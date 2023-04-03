@@ -18,9 +18,9 @@ console.log(isAbsolute('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
 console.log(isAbsolute('./README.md'))
 
 //Convertir la ruta a absoluta
-const turnAbsolut = (absolute) => path.resolve(absolute)
+const turnToAbsolute = (absolute) => path.resolve(absolute)
 
-console.log(turnAbsolut('./README.md'))
+console.log(turnToAbsolute('./README.md')) 
   
 //detectar archivo
 
