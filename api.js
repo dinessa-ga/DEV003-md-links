@@ -8,17 +8,15 @@ const path = require('path')
 //     return fs.existsSync(path)
 //   }
 
-  const pathValid1 = (path) => fs.existsSync(path)
-   console.log(pathValid1('./README.md'))
-  
-//  console.log(path) 
-//  console.log(fs) 
+const pathValid1 = (path) => fs.existsSync(path)
+console.log(pathValid1('./README.md'))
+
 
 const fullPath = path.join(__dirname, "./README.md")
 //console.log(fullPath)
 
 //ruta absoluta
- const isAbsolute = (path) => {
+const isAbsolute = (path) => {
     return path.isAbsolute(path)
   }
   
