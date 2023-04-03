@@ -27,34 +27,45 @@ const isFile = (path) => {
   return stats.isFile()
 }
 //console.log(isFile('C:/Users/USER/Documents/DEV003-md-links/readme.md'))  
+
 //detectar .md 
-const isFileMd = (file) => path.extname(file) === '.md'; //validar extensión de archivo
-console.log(isFileMd('C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md'))
+const isFileMd = (file) => path.extname(file) === '.md'; 
+//console.log(isFileMd('C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md'))
 
 //Leer archivo .md
 const readingFile = (direc) => fs.readFileSync(direc, 'utf8');
 
-//console.log(readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
+console.log(readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
 
-//crear arreglo href text file
+//crear arreglo sobre el .md - href text 
 function findLinks(texto) {
+  console.log("texto",texto)
   const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g;
-  const enlaces = [];
+  const links = [];
   let match;
 
   while ((match = regex.exec(texto)) !== null) {
-    enlaces.push({ 
+    links.push({ 
       texto: match[1],
       url: match[2]
     });
   }
 
-  return enlaces;
+  return links;
 }
 
-//console.log(readFiles('esto es','C:/Users/USER/Documents/DEV003-md-links/readme.md'))
-//console.log(findLinks('esto es','C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md'))
-//console.log(readFiles('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
+const textMD=`[ ] **Configuración de npm-scripts**
+
+<details><summary>Links</summary><p>
+
+* [scripts - Documentación oficial (en inglés)](https://docs.npmjs.com/misc/scripts)
+</p></details>`;
+
+const links = findLinks(textMD)
+console.log(links)
+
+console.log(findLinks('https://docs.npmjs.com/misc/scripts'))
+
 module.exports = {
   pathValid,
   isAbsolute,
