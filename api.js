@@ -1,25 +1,33 @@
-const fs =require('fs')
+const fs = require('fs')
 
 const path = require('path')
-
 
 
 const pathValid = (path) => {
    return fs.existsSync(path)
 }
 
-const pathValid1 = (path) => fs.existsSync(path)
-//console.log(pathValid1('./README.md'))
-console.log(pathValid('C:/Users/USER/Documents/DEV003-md-links'));
+//console.log(pathValid('C:/Users/USER/Documents/DEV003-md-links'));
 
-const fullPath = path.join(__dirname, "./README.md")
-//console.log(fullPath)
+//const pathValid1 = (path) => fs.existsSync(path)
+
+
 
 //ruta absoluta
-const isAbsolute = (path) => {
-    return path.isAbsolute(path)
-  }
+const isAbsolute = (direc) => path.isAbsolute(direc);//validar si es absoluta o relativa
+
+console.log(isAbsolute('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
+
+console.log(isAbsolute('./README.md'))
+
+//Convertir la ruta a absoluta
+const turnAbsolut = (absolute) => path.resolve(absolute)
+
+console.log(turnAbsolut('./README.md'))
   
+//detectar archivo
+
+
   
 //detectar .md"
   const  isFileMd =  (pathResolved) => {
