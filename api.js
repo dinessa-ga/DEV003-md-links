@@ -8,10 +8,7 @@ const pathValid = (path) => {
 }
 
 //console.log(pathValid('C:/Users/USER/Documents/DEV003-md-links'));
-
 //const pathValid1 = (path) => fs.existsSync(path)
-
-
 
 //ruta absoluta
 const isAbsolute = (direc) => path.isAbsolute(direc);//validar si es absoluta o relativa
