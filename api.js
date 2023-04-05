@@ -37,12 +37,9 @@ const readingFile = (file) => promises.readFile(file, 'utf8');
 
 //crear arreglo sobre el .md - href text 
 function findLinks(texto, path) {
-  
   const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g;
   const links = [];
- 
   let match;
-
   while ((match = regex.exec(texto)) !== null) {
     //console.log(match)
     links.push({ 
