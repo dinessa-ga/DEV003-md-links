@@ -1,6 +1,7 @@
 const fs = require('fs')
-
+const promises = require('fs').promises
 const path = require('path')
+//const extract = require('markdown-link-extractor');
 
 
 const pathValid = (path) => {
@@ -33,38 +34,52 @@ const isFileMd = (file) => path.extname(file) === '.md';
 //console.log(isFileMd('C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md'))
 
 //Leer archivo .md
-const readingFile = (direc) => fs.readFileSync(direc, 'utf8');
+const readingFile = (direc) => promises.readFile(direc, 'utf8');
+//const linksRead = extract(readingFile)
+//console.log(linksRead)
+// readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.mz').then((data) => {
+//       console.log(data) //posteriormente esto será mi resolve
+//   }).catch(err => console.log({code: 'ENOENT' }, 'El archivo no puede ser leído'));
 
-console.log(readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
+//console.log(readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
+
 
 //crear arreglo sobre el .md - href text 
-function findLinks(texto) {
-  console.log("texto",texto)
+function findLinks(texto, path) {
+  
   const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g;
   const links = [];
+ 
   let match;
 
   while ((match = regex.exec(texto)) !== null) {
+    //console.log(match)
     links.push({ 
       texto: match[1],
-      url: match[2]
+      url: match[2],
+      file: path
     });
   }
 
   return links;
+  
 }
+ readingFile('folder_files\\prueba.md').then((texto) => {
+       console.log(findLinks('folder_files\\prueba.md', texto));
+    }).catch(err => console.log(err.message))
 
-const textMD=`[ ] **Configuración de npm-scripts**
 
-<details><summary>Links</summary><p>
+// const textMD=`[ ] **Configuración de npm-scripts**
 
-* [scripts - Documentación oficial (en inglés)](https://docs.npmjs.com/misc/scripts)
-</p></details>`;
+// <details><summary>Links</summary><p>
 
-const links = findLinks(textMD)
-console.log(links)
+// * [scripts - Documentación oficial (en inglés)](https://docs.npmjs.com/misc/scripts)
+// </p></details>`;
 
-console.log(findLinks('https://docs.npmjs.com/misc/scripts'))
+// const links = findLinks(textMD)
+//console.log(links)
+
+//console.log(findLinks('https://docs.npmjs.com/misc/scripts'))
 
 module.exports = {
   pathValid,
@@ -72,6 +87,7 @@ module.exports = {
   turnToAbsolute,
   isFile,
   isFileMd,
-  readingFile
+  readingFile,
+  findLinks
 }
  
