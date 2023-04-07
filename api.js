@@ -25,12 +25,12 @@ const isFileMd = (file) => path.extname(file) === '.md';
 
 
 //Leer archivo .md
-const readingFile = (file) => promises.readFile(file, 'utf8');
+const readingFile = (file) => promises.readFile(file, 'utf8'); //Antes se utilizaba readFileSync
 
 
-// readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.mz').then((data) => {
-//       console.log(data) //posteriormente esto será mi resolve
-//   }).catch(err => console.log({code: 'ENOENT' }, 'El archivo no puede ser leído'));
+readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md').then((data) => {
+      console.log(data) //posteriormente esto será mi resolve
+  }).catch(err => console.log({code: 'ENOENT' }, 'El archivo no puede ser leído'));
 
 //console.log(readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
 
@@ -52,9 +52,9 @@ function findLinks(texto, path) {
   return links;
   
 }
- readingFile('folder_files\\prueba.md').then((texto) => {
-       console.log(findLinks('folder_files\\prueba.md', texto));
-    }).catch(err => console.log(err.message))
+//  readingFile('folder_files\\prueba.md').then((texto) => {
+//        console.log(findLinks('folder_files\\prueba.md', texto));
+//     }).catch(err => console.log(err.message))
 
 
 module.exports = {

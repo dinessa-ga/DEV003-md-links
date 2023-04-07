@@ -10,6 +10,7 @@
     "commit": "a63a770ea33332882790401851df337734b0b734"
   },
   "dependencies": {
+    "jest": "^29.5.0",
     "node-fetch": "^3.3.1"
   }
 }
