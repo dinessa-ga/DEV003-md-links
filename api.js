@@ -28,35 +28,36 @@ const isFileMd = (file) => path.extname(file) === '.md';
 const readingFile = (file) => promises.readFile(file, 'utf8'); //Antes se utilizaba readFileSync
 
 
-readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md').then((data) => {
-      console.log(data) //posteriormente esto será mi resolve
-  }).catch(err => console.log({code: 'ENOENT' }, 'El archivo no puede ser leído'));
+// readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md').then((data) => {
+//       console.log(data) //posteriormente esto será mi resolve
+//   }).catch(err => console.log({code: 'ENOENT' }, 'El archivo no puede ser leído'));
 
 //console.log(readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
 
 
-//crear arreglo sobre el .md - href text 
-function findLinks(texto, path) {
+
+//crear arreglo sobre el .md - href text - CASO: VALIDATE:FALSE
+const findLinks = (texto, path) => {
   const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g;
   const links = [];
   let match;
   while ((match = regex.exec(texto)) !== null) {
-    //console.log(match)
     links.push({ 
       texto: match[1],
       url: match[2],
       file: path
     });
   }
-
   return links;
-  
 }
-//  readingFile('folder_files\\prueba.md').then((texto) => {
-//        console.log(findLinks('folder_files\\prueba.md', texto));
-//     }).catch(err => console.log(err.message))
+
+ readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
+      .then((texto) => {
+       console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
+    }).catch(err => console.log(err.message))
 
 
+   // C:/Users/USER/Documents/DEV003-md-links/readme.md
 module.exports = {
   pathValid,
   isAbsolute,
