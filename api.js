@@ -27,28 +27,38 @@ const isFileMd = (file) => path.extname(file) === '.md';
 //Leer archivo .md
 const readingFile = (file) => promises.readFile(file, 'utf8'); //Antes se utilizaba readFileSync
 
+//C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md
 
 // readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md').then((data) => {
 //       console.log(data) //posteriormente esto será mi resolve
-//   }).catch(err => console.log({code: 'ENOENT' }, 'El archivo no puede ser leído'));
+//   }).catch(err => console.log('El archivo no puede ser leído'));
 
-//console.log(readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md'))
+
 
 
 
 //crear arreglo sobre el .md - href text - CASO: VALIDATE:FALSE
-const findLinks = (texto, path) => {
-  const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g;
-  const links = [];
-  let match;
-  while ((match = regex.exec(texto)) !== null) {
+const findLinks = (text, path) => {
+  const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g
+  const links = []
+  let match
+  while ((match = regex.exec(text)) !== null) {
     links.push({ 
       texto: match[1],
       url: match[2],
       file: path
-    });
+    })
   }
   return links;
+}
+
+const validateLinks = () => {
+  return new Promise((resolve) => {
+    const arrayPromises = []
+    
+    
+  })
+
 }
 
  readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
@@ -57,7 +67,8 @@ const findLinks = (texto, path) => {
     }).catch(err => console.log(err.message))
 
 
-   // C:/Users/USER/Documents/DEV003-md-links/readme.md
+
+    
 module.exports = {
   pathValid,
   isAbsolute,
@@ -65,6 +76,7 @@ module.exports = {
   isFile,
   isFileMd,
   readingFile,
-  findLinks
+  findLinks,
+  validateLinks
 }
  

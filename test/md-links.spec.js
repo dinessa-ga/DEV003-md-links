@@ -1,4 +1,6 @@
-const mdLinks = require('../');
+const mdLinks = require('../api.js');
+const { promises } = require('fs');
+const readingFile = require('./readingFile');
 
 
 describe('mdLinks', () => {
@@ -9,3 +11,5 @@ describe('mdLinks', () => {
 
   
 });
+
+
