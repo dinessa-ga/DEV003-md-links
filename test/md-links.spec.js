@@ -1,15 +1,26 @@
-const mdLinks = require('../api.js');
 const { promises } = require('fs');
-const readingFile = require('./readingFile');
+const {isFileMd, readingFile} = require('./api.js');
 
 
-describe('mdLinks', () => {
+// describe('mdLinks', () => {
 
-  it('should...', () => {
-    console.log('FIX ME!');
+//   it('should...', () => {
+//     console.log('FIX ME!');
+//   });
+
+  
+// });
+
+test('api.js', () => {
+
+  it('comprueba si un archivo es .md', () => {
+    expect(isFileMd('prueba.md')).toBe(true);
+    expect(isFileMd('archivo.txt')).toBe(false);
   });
 
   
 });
+
+
 
 
