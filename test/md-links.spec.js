@@ -1,8 +1,8 @@
 const mdLinks = require('../');
+const {isFileMd, readingFile, findLinks } = require('../api.js');
+const fs = require('fs');
 
-const { promises } = require('fs');
-const {isFileMd, readingFile} = require('./api.js');
-const findLinks = require('./api.js');
+
 
 
 // describe('mdLinks', () => {
@@ -25,7 +25,7 @@ describe('isFileMd', () => {
 });
 
 
-// Define la prueba utilizando la función test de Jest
+// Función readingFile
 test('readingFile debería leer el contenido del archivo', () => {
   // Crea un archivo temporal con un contenido específico
   fs.writeFileSync('readme1.md', 'Hello, world!', 'utf8');
@@ -41,7 +41,7 @@ test('readingFile debería leer el contenido del archivo', () => {
 });
 
 
-// Define la prueba utilizando la función test de Jest
+// Función FindLinks
 test('findLinks should find all links in the text', () => {
   // Define el texto de entrada y el path
   const text = 'Este es un texto con un [enlace](https://www.google.com)';

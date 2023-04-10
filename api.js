@@ -57,10 +57,12 @@ readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
  console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
 }).catch(err => console.log(err.message))
 
-const validateLinks = () => {
+const validateLinks = (links) => {
   return new Promise((resolve) => {
     const arrayPromises = []
-    
+    //ciclo - iterar array - le paso fetch - solamente a la propiedad href
+    //array de objetos - retorne 2 array de objetos - uno cuando funcione y otro cuando no 'roto'
+    //luego del fetch usar .then (ok) y .catch (rotos)
     
   })
 
