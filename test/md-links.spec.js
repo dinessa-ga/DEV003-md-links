@@ -1,7 +1,6 @@
 const mdLinks = require('../');
 
-//const { promises } = require('fs');
-const { promises } = fs;
+const { promises } = require('fs');
 const {isFileMd, readingFile} = require('./api.js');
 const findLinks = require('./api.js');
 
