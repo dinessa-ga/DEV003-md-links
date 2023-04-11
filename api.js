@@ -30,7 +30,7 @@ const readingFile = (file) => promises.readFile(file, 'utf8'); //Antes se utiliz
 //C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md
 
 // readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md').then((data) => {
-//       console.log(data) //posteriormente esto será mi resolve
+//       console.log(data) 
 //   }).catch(err => console.log('El archivo no puede ser leído'));
 
 
@@ -52,10 +52,10 @@ const findLinks = (text, path) => {
   return links;
 }
 
-readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
-.then((texto) => {
- console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
-}).catch(err => console.log(err.message))
+// readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
+// .then((texto) => {
+//  console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
+// }).catch(err => console.log(err.message))
 
 const validateLinks = (links) => {
   return new Promise((resolve) => {
