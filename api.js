@@ -9,7 +9,7 @@ const pathValid = (path) => {
 }
 
 //ruta absoluta
-const isAbsolute = (direc) => path.isAbsolute(direc);//validar si es absoluta o relativa
+const isAbsolute = (filePath) => path.isAbsolute(filePath);//validar si es absoluta o relativa
 
 //Convertir la ruta a absoluta
 const turnToAbsolute = (absolute) => path.resolve(absolute)

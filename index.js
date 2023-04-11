@@ -1,34 +1,34 @@
-const api = require('./api');
+const api = require('./api.js');
 
 const mdLinks = (path, options) => {
   return new Promise((resolve, reject) =>{
-   // const absolutePath =  pathValid(path) 
-   //identifica si la ruta existe función pathValid
-   
-  //  if (!api.pathValid(path)) {
-  //   throw new Error(`File "${path}" no existe`);
-  // }
+  let isPath = path
+  
+  //identifica si la ruta existe función pathValid
+  if (!api.pathValid(isPath)) {
+    reject(new Error(`Ruta "${isPath}" no existe`));
+  }
 
   //identifica si la ruta es absoluta función isAbsolute
-  if (!api.isAbsolute(path)) {
-  let pathAbsolute = api.turnToAbsolute(path)
-    if (!api.isFile){
-      throw new Error(`File "${pathAbsolute}" no es un archivo`);
-    } 
+  if (!api.isAbsolute(isPath)) {
+     let absolutePath = api.turnToAbsolute(isPath) //ejecuta función que convierte a absoluta
+   //Verifica si es archivo
+   if (!api.isFile(absolutePath)){
+    reject(new Error(`La ruta "${absolutePath}" no contiene un archivo`));
+  } 
   } 
 
-  
+ 
 
-  // 
-  // if (!api.isMarkdownFile(path)) {
-  //   throw new Error(`"${path}" is not a Markdown file`);
+  // //tiene archivo .md? - isFileMd
+  //  if(!api.isFileMd(isPath)){
+  //   reject(new Error(`La ruta "${isPath}" no tiene archivos .md`))
   // }
 
     
       
     
 
-    //
 
     resolve('es correcto')
     // si es true devuelve estos 5 si es false 3
@@ -38,7 +38,10 @@ const mdLinks = (path, options) => {
   //resolver la función de http
 
 }
-mdLinks('C:/Users/USER/Documents/DEV003-md-links/readme.md')
+//C:/Users/USER/Documents/DEV003-md-links/folder_files/archivo.txt
+//C:/Users/USER/Documents/DEV003-md-links/readme.md
+
+mdLinks('README.md')
 .then((result) => {
   console.log(result)
 })
