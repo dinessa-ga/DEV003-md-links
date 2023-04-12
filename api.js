@@ -9,7 +9,7 @@ const pathValid = (path) => {
 }
 
 //ruta absoluta
-const isAbsolute = (filePath) => path.isAbsolute(filePath);//validar si es absoluta o relativa
+const isAbsolute = (filePath) => path.isAbsolute(filePath);//pregunta si es absoluta o relativa
 
 //Convertir la ruta a absoluta
 const turnToAbsolute = (absolute) => path.resolve(absolute)
@@ -44,29 +44,81 @@ const findLinks = (text, path) => {
   let match
   while ((match = regex.exec(text)) !== null) {
     links.push({ 
-      texto: match[1],
-      url: match[2],
+      href: match[2],
+      text: match[1],
       file: path
     })
   }
   return links;
 }
 
-// readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
-// .then((texto) => {
-//  console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
-// }).catch(err => console.log(err.message))
+readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
+.then((texto) => {
+ console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
+}).catch(err => console.log(err.message))
 
-const validateLinks = (links) => {
-  return new Promise((resolve) => {
-    const arrayPromises = []
-    //ciclo - iterar array - le paso fetch - solamente a la propiedad href
+
+//ciclo - iterar array - le paso fetch - solamente a la propiedad href
     //array de objetos - retorne 2 array de objetos - uno cuando funcione y otro cuando no 'roto'
     //luego del fetch usar .then (ok) y .catch (rotos)
-    
-  })
 
-}
+// const validateLinks = (array) => {
+//   return new Promise((resolve) => {
+//     let arrayPromises = []
+//     for (let i=0; i<=array.length; i++){
+//       fetch(array[i].href)
+      
+//       .then((respuesta) => {
+//         arrayPromises.push({
+//           text: array[i].text,
+//           href: array[i].href,
+//           file: array[i].file,
+//           status: respuesta.status,
+//           message: 'Ok'
+//         })
+//       resolve(arrayPromises)
+      
+//       })
+//       .catch((error) => {
+//         console.log('esto es un' + error)
+//       })
+//     }
+    
+//   })
+// }
+
+const validateLinks = (arrayLinks) => {
+  const results = arrayLinks.map((link) => {
+    return fetch(link.href)
+      .then((response) => {
+        const status = {
+          href: link.href,
+          text: link.text,
+          file: link.file,
+          status: response.status,
+          ok: 'ok'
+        };
+        return status;
+      })
+      .catch((error) => {
+        const statusError = {
+          href: link.href,
+          text: link.text,
+          file: link.file,
+          status: error.status || 'Unknown',
+          ok: 'fail'
+        };
+        return statusError;
+      });
+  });
+  return Promise.all(results);
+};
+
+// const resultado = findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md');
+// validateLinks(resultado)
+//  .then((res) => console.log(res))
+//  .catch((error) => console.log(error))
+
 
 
 
@@ -81,6 +133,6 @@ module.exports = {
   isFileMd,
   readingFile,
   findLinks,
-  validateLinks
+  validateLinks,
 }
  
