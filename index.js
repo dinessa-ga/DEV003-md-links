@@ -24,11 +24,16 @@ const mdLinks = (path, options) => {
     }
 
     // si es true devuelve estos 5 si es false 3
-      //el usuario va a pedir por medio de comando cli
+    //el usuario va a pedir por medio de comando cli
     let alllinks = [] 
     const promisesRead = []
-    promisesRead.push(api.readingFile(file))
-      
+    promisesRead.push(api.readingFile(isPath))
+    Promise.all(promisesRead)
+    .then((result)=>{
+      for(let i=0; i<result.length; i++){
+        
+      }
+    })
       
 
 
@@ -42,7 +47,7 @@ const mdLinks = (path, options) => {
 //C:/Users/USER/Documents/DEV003-md-links/folder_files/archivo.txt
 //C:/Users/USER/Documents/DEV003-md-links/readme.md
 
-mdLinks('README.text')
+mdLinks('README.md')
 .then((result) => {
   console.log(result)
 })
