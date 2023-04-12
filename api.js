@@ -38,11 +38,11 @@ const readingFile = (file) => promises.readFile(file, 'utf8'); //Antes se utiliz
 
 
 //crear arreglo sobre el .md - href text - CASO: VALIDATE:FALSE
-const findLinks = (text, path) => {
+const findLinks = (data, path) => {
   const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g
   const links = []
   let match
-  while ((match = regex.exec(text)) !== null) {
+  while ((match = regex.exec(data)) !== null) {
     links.push({ 
       href: match[2],
       text: match[1],
@@ -52,10 +52,10 @@ const findLinks = (text, path) => {
   return links;
 }
 
-readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
-.then((texto) => {
- console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
-}).catch(err => console.log(err.message))
+// readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
+// .then((texto) => {
+//  console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
+// }).catch(err => console.log(err.message))
 
 
 //ciclo - iterar array - le paso fetch - solamente a la propiedad href
@@ -114,12 +114,27 @@ const validateLinks = (arrayLinks) => {
   return Promise.all(results);
 };
 
-// const resultado = findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md');
+const resultado = findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md');
+validateLinks(resultado)
+ .then((res) => console.log(res))
+.catch((error) => console.log(error))
+
+// findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md')
+//   .then((datosdatos) => {
+//       console.log(" es", datosdatos)
+//       validateLinks(datosdatos).then((resultados) => {console.log("status", resultados)})
+//   })
+
+// const read = readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
+// const resultado = findLinks(read);
 // validateLinks(resultado)
 //  .then((res) => console.log(res))
 //  .catch((error) => console.log(error))
 
-
+// findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md')
+// .then((texto) => {
+//  console.log(validateLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
+// }).catch(err => console.log(err.message))
 
 
 
