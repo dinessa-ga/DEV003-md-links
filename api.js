@@ -119,27 +119,8 @@ validateLinks(resultado)
  .then((res) => console.log(res))
 .catch((error) => console.log(error))
 
-// findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md')
-//   .then((datosdatos) => {
-//       console.log(" es", datosdatos)
-//       validateLinks(datosdatos).then((resultados) => {console.log("status", resultados)})
-//   })
+ 
 
-// const read = readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
-// const resultado = findLinks(read);
-// validateLinks(resultado)
-//  .then((res) => console.log(res))
-//  .catch((error) => console.log(error))
-
-// findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md')
-// .then((texto) => {
-//  console.log(validateLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
-// }).catch(err => console.log(err.message))
-
-
-
-
-    
 module.exports = {
   pathValid,
   isAbsolute,
