@@ -25,23 +25,19 @@ const isFileMd = (file) => path.extname(file) === '.md';
 
 
 //Leer archivo .md
-const readingFile = (file) => promises.readFile(file, 'utf8'); //Antes se utilizaba readFileSync
+const readingFile = (file) => promises.readFile(file, 'utf8') //Antes se utilizaba readFileSync
 
 //C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md
 
-// readingFile('C:/Users/USER/Documents/DEV003-md-links/readme.md').then((data) => {
+// readingFile('C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md').then((data) => {
 //       console.log(data) 
 //   }).catch(err => console.log('El archivo no puede ser leído'));
-
-
-
-
 
 //crear arreglo sobre el .md -- CASO: VALIDATE:FALSE
 const findLinks = (data, path) => {
   const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g
   const links = []
-  let match
+  let match 
   while ((match = regex.exec(data)) !== null) {
     links.push({ 
       href: match[0],
@@ -52,10 +48,11 @@ const findLinks = (data, path) => {
   return links;
 }
 
-// readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
-// .then((texto) => {
-//  console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
-// }).catch(err => console.log(err.message))
+readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
+.then((texto) => {
+ console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
+}).catch(err => console.log(err.message))
+ 
 
 
 //ciclo - iterar array - le paso fetch - solamente a la propiedad href
@@ -77,7 +74,8 @@ const findLinks = (data, path) => {
 //             status: response.status,
 //             ok: response.statusText
 //           };
-//          return status;
+//         //  return status;
+       
 //         }) 
 //         //capturar errores
 //        .catch((error) => {
@@ -96,52 +94,59 @@ const findLinks = (data, path) => {
 // }
 
 
+// const validateLinks = (response) => {
+//   const responseValidated = response.map((item) => {
+//       const newItem = fetch(item.href).then((data, path) => {
+//           const newValidatedItem = {
+//               href: item.href,
+//               text: item.text,
+//               file: item.file,
+//               status: data.status,
+//               ok: data.statusText,
+//           }
+//           return newValidatedItem
+//       }).catch((error) => {
+//           const newValidatedItem = {
+//               href: item.href,
+//               text: item.text,
+//               file: item.file,
+//               status: error.statusText,
+//               ok: error.name,
+//           }
+//           return newValidatedItem;
+//       })
+//       return newItem
+//   })
+//   return Promise.all(responseValidated);
+// }
 
 
 
-
-const validateLinks = (response) => {
-  const responseValidated = response.map((item) => {
-      const newItem = fetch(item.href).then((data) => {
-          const newValidatedItem = {
-              href: item.href,
-              text: item.text,
-              file: item.file,
-              status: data.status,
-              ok: data.statusText,
-          }
-          return newValidatedItem
-      }).catch((error) => {
-          const newValidatedItem = {
-              href: item.href,
-              text: item.text,
-              file: item.file,
-              status: error.status,
-              ok: error.name,
-          }
-          return newValidatedItem;
-      })
-      return newItem
-  })
-  return Promise.all(responseValidated);
+const validateLinks = (link, validateCallback) => {
+  fetch(link.href, { method: 'HEAD' })
+    .then(response => {
+      link.status = response.status
+      link.ok = response.ok ? 'ok' : 'fail'
+      link.validated = true
+      validateCallback()
+    })
+    .catch(error => {
+      link.status = null
+      link.ok = error
+      link.validated = true
+      validateCallback()
+    })
 }
 
-const resultado = findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md');
-validateLinks(resultado)
-.then((res) => console.log('llamando', res))
-.catch((error) => console.log(error))
-
-// const read = readingFile ('README.md')
-// resultado = findLinks(read);
-// validateLinks(resultado)
-// .then((res) => console.log(res))
-// .catch((error) => console.log(error))
-
-// const resultado = readingFile('README.md');
-//   findLinks(resultado)
+// const resultado = readFile('README.md');
+//   validateLinks(findLinks(resultado))
 //   .then((res) => console.log(res))
 //   .catch((error) => console.log(error))
 
+// const resultado = findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md');
+// validateLinks(resultado)
+// .then((res) => console.log('llamando', res))
+// .catch((error) => console.log(error))
 
 module.exports = {
   pathValid,

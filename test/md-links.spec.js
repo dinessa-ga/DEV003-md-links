@@ -1,4 +1,4 @@
-const mdLinks = require('../');
+//const mdLinks = require('../');
 const {isFileMd, readingFile, findLinks } = require('../api.js');
 const fs = require('fs');
 

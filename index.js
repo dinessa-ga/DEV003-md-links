@@ -25,15 +25,27 @@ const mdLinks = (path, options) => {
 
     // si es true devuelve estos 5 si es false 3
     //el usuario va a pedir por medio de comando cli
-    let alllinks = [] 
-    const promisesRead = []
-    promisesRead.push(api.readingFile(isPath))
-    Promise.all(promisesRead)
-    .then((result)=>{
-      for(let i=0; i<result.length; i++){
+    // let alllinks = [] 
+    // const promisesRead = []
+    // promisesRead.push(api.readingFile(isPath))
+    // Promise.all(promisesRead)
+    // .then((result)=>{
+    //   for(let i=0; i<result.length; i++){
         
-      }
-    })
+    //   }
+    // })
+
+    if(options?.validate){
+      api.validateLinks(response)
+      .then((result) =>{
+        console.log('result if', result)
+        resolve(result)
+      })
+    }else{
+      // console.log('result else', response);
+      resolve(response)
+    }
+     
       
 
 
