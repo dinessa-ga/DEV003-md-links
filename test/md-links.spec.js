@@ -53,8 +53,8 @@ test('findLinks should find all links in the text', () => {
   // Verifica que la función haya encontrado el enlace correcto
   expect(links).toEqual([
     {
+      href: 'https://www.google.com',
       texto: 'enlace',
-      url: 'https://www.google.com',
       file: '/test/file.md'
     }
   ]);

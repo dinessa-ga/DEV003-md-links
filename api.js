@@ -63,41 +63,72 @@ const findLinks = (data, path) => {
 //luego del fetch usar .then (ok) y .catch (rotos)
 
 //crear arreglo que retorne CASO --validate:true 
-const validateLinks = (arrayLinks) => {
-  const results = [];
-  for (let i = 0; i < arrayLinks.length; i++) {
-    const link = arrayLinks[i]
+// const validateLinks = (arrayLinks) => {
+//   const results = [];
+//   for (let i = 0; i < arrayLinks.length; i++) {
+//     const link = arrayLinks[i]
        
-    results.push(
-      fetch(link.href)
-        .then((response) => {
-          const status = {
-            href: link.href,
-            text: link.text,
-            file: link.file,
-            status: response.status,
-            ok: 'ok'
-          };
-         return status;
-        }) 
-        // .catch((error) => {
-        //   const statusError = {
-        //     href: link.href,
-        //     text: link.text,
-        //     file: link.file,
-        //     status: error.status,
-        //     ok: 'fail'
-        //   }
-        //   return statusError
-        // })
-    )
-  }
-  return Promise.all(results)
+//     results.push(fetch(link.href)
+//         .then((response) => {
+//           const status = {
+//             href: link.href,
+//             text: link.text,
+//             file: link.file,
+//             status: response.status,
+//             ok: response.statusText
+//           };
+//          return status;
+//         }) 
+//         //capturar errores
+//        .catch((error) => {
+//         const statusfail = {
+//           href: link.href,
+//           text: link.text,
+//           file: link.file,
+//           status: error.status,
+//           ok: error.statusText
+//         };
+//        return statusfail;
+//       })
+//     )
+//   }
+//   return Promise.all(results)
+// }
+
+
+
+
+
+
+const validateLinks = (response) => {
+  const responseValidated = response.map((item) => {
+      const newItem = fetch(item.href).then((data) => {
+          const newValidatedItem = {
+              href: item.href,
+              text: item.text,
+              file: item.file,
+              status: data.status,
+              ok: data.statusText,
+          }
+          return newValidatedItem
+      }).catch((error) => {
+          const newValidatedItem = {
+              href: item.href,
+              text: item.text,
+              file: item.file,
+              status: error.status,
+              ok: error.name,
+          }
+          return newValidatedItem;
+      })
+      return newItem
+  })
+  return Promise.all(responseValidated);
 }
 
 const resultado = findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md');
 validateLinks(resultado)
- .then((res) => console.log(res))
+.then((res) => console.log('llamando', res))
 .catch((error) => console.log(error))
 
 // const read = readingFile ('README.md')

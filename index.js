@@ -47,13 +47,13 @@ const mdLinks = (path, options) => {
 //C:/Users/USER/Documents/DEV003-md-links/folder_files/archivo.txt
 //C:/Users/USER/Documents/DEV003-md-links/readme.md
 
-mdLinks('README.md')
-.then((result) => {
-  console.log(result)
-})
-.catch((error) => {
-  console.log(error)
-})
+// mdLinks('README.text')
+// .then((result) => {
+//   console.log(result)
+// })
+// .catch((error) => {
+//   console.log(error)
+// })
 
 module.exports = () => {
   // ...
