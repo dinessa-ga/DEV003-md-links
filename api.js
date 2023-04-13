@@ -25,9 +25,9 @@ const isFileMd = (file) => path.extname(file) === '.md';
 
 
 //Leer archivo .md
-const readingFile = (file) => promises.readFile(file, 'utf8') //Antes se utilizaba readFileSync
+//const readingFile = (file) => promises.readFile(file, 'utf8') //Antes se utilizaba readFileSync
+const readingFile = (file) => fs.readFileSync(file, 'utf8');
 
-//C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md
 
 // readingFile('C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md').then((data) => {
 //       console.log(data) 
@@ -37,8 +37,9 @@ const readingFile = (file) => promises.readFile(file, 'utf8') //Antes se utiliza
 const findLinks = (data, path) => {
   const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g
   const links = []
-  let match 
-  while ((match = regex.exec(data)) !== null) {
+  const fileContent = readingFile(path)
+  let match
+  while ((match = regex.exec(fileContent)) !== null) {
     links.push({ 
       href: match[0],
       text: match[1],
@@ -48,10 +49,13 @@ const findLinks = (data, path) => {
   return links;
 }
 
-readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
-.then((texto) => {
- console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
-}).catch(err => console.log(err.message))
+// const links = findLinks('arreglo','README.md');
+// console.log(links);
+
+// readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
+// .then((texto) => {
+//  console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
+// }).catch(err => console.log(err.message))
  
 
 
@@ -59,94 +63,42 @@ readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
 //array de objetos - retorne 2 array de objetos - uno cuando funcione y otro cuando no='roto'
 //luego del fetch usar .then (ok) y .catch (rotos)
 
-//crear arreglo que retorne CASO --validate:true 
-// const validateLinks = (arrayLinks) => {
-//   const results = [];
-//   for (let i = 0; i < arrayLinks.length; i++) {
-//     const link = arrayLinks[i]
-       
-//     results.push(fetch(link.href)
-//         .then((response) => {
-//           const status = {
-//             href: link.href,
-//             text: link.text,
-//             file: link.file,
-//             status: response.status,
-//             ok: response.statusText
-//           };
-//         //  return status;
-       
-//         }) 
-//         //capturar errores
-//        .catch((error) => {
-//         const statusfail = {
-//           href: link.href,
-//           text: link.text,
-//           file: link.file,
-//           status: error.status,
-//           ok: error.statusText
-//         };
-//        return statusfail;
-//       })
-//     )
-//   }
-//   return Promise.all(results)
-// }
+const validateLinks = (array) => {
+  let arrayObject = array.map((link) => {
+      return fetch(link.href)
+          .then(data => {
+              return {
+                  href: link.href,
+                  text: link.text,
+                  file: link.file,
+                  status: data.status,
+                  state: data.statusText
+              }
+          })
+          .catch(error => {
+              return {
+                  href: link.href,
+                  text: link.text,
+                  file: link.file,
+                  status: error.status,
+                  state: error.statusText,
+              }
+          });
+  })
+  return Promise.all(arrayObject);
+} 
 
-
-// const validateLinks = (response) => {
-//   const responseValidated = response.map((item) => {
-//       const newItem = fetch(item.href).then((data, path) => {
-//           const newValidatedItem = {
-//               href: item.href,
-//               text: item.text,
-//               file: item.file,
-//               status: data.status,
-//               ok: data.statusText,
-//           }
-//           return newValidatedItem
-//       }).catch((error) => {
-//           const newValidatedItem = {
-//               href: item.href,
-//               text: item.text,
-//               file: item.file,
-//               status: error.statusText,
-//               ok: error.name,
-//           }
-//           return newValidatedItem;
-//       })
-//       return newItem
-//   })
-//   return Promise.all(responseValidated);
-// }
-
-
-
-const validateLinks = (link, validateCallback) => {
-  fetch(link.href, { method: 'HEAD' })
-    .then(response => {
-      link.status = response.status
-      link.ok = response.ok ? 'ok' : 'fail'
-      link.validated = true
-      validateCallback()
-    })
-    .catch(error => {
-      link.status = null
-      link.ok = error
-      link.validated = true
-      validateCallback()
-    })
-}
+//console.log(validateLinks(findLinks('','README.md')))
 
 // const resultado = readFile('README.md');
 //   validateLinks(findLinks(resultado))
 //   .then((res) => console.log(res))
 //   .catch((error) => console.log(error))
 
-// const resultado = findLinks('C:/Users/USER/Documents/DEV003-md-links/README.md');
-// validateLinks(resultado)
-// .then((res) => console.log('llamando', res))
-// .catch((error) => console.log(error))
+const resultado = findLinks('esto','README.md');
+validateLinks(resultado)
+.then((res) => console.log('llamando', res))
+.catch((error) => console.log(error))
 
 module.exports = {
   pathValid,

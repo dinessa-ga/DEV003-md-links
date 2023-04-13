@@ -35,15 +35,13 @@ const mdLinks = (path, options) => {
     //   }
     // })
 
+    const response = api.findLinks(isPath)
     if(options?.validate){
       api.validateLinks(response)
       .then((result) =>{
-        console.log('result if', result)
+        //console.log('result if', result)
         resolve(result)
       })
-    }else{
-      // console.log('result else', response);
-      resolve(response)
     }
      
       
@@ -68,5 +66,5 @@ const mdLinks = (path, options) => {
 // })
 
 module.exports = () => {
-  // ...
+   mdLinks
 };

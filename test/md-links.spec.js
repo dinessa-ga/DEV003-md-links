@@ -1,6 +1,7 @@
 //const mdLinks = require('../');
 const {isFileMd, readingFile, findLinks } = require('../api.js');
 const fs = require('fs');
+const mdLinks = require('../index.js')
 
 
 
