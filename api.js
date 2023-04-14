@@ -63,8 +63,8 @@ const validateLinks = (arr) => {
         href: link.href,
         text: link.text,
         file: link.file,
-        tatus: error ? error.status : 'Error desconocido',
-        statusText: error ? error.statusText : 'Error desconocido'
+        tatus: error.status,
+        statusText: error.statusText
       }));
   }));
 }
