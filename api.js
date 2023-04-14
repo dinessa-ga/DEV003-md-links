@@ -1,3 +1,4 @@
+const { ok } = require('assert')
 const fs = require('fs')
 const { Response } = require('node-fetch')
 const promises = require('fs').promises
@@ -29,11 +30,6 @@ const isFileMd = (file) => path.extname(file) === '.md';
 //const readingFile = (file) => promises.readFile(file, 'utf8') //Antes se utilizaba readFileSync
 const readingFile = (file) => fs.readFileSync(file, 'utf8');
 
-
-// readingFile('C:/Users/USER/Documents/DEV003-md-links/folder_files/prueba.md').then((data) => {
-//       console.log(data) 
-//   }).catch(err => console.log('El archivo no puede ser leído'));
-
 //crear arreglo sobre el .md -- CASO: VALIDATE:FALSE
 const findLinks = (path) => {
   const data = readingFile(path)
@@ -42,7 +38,7 @@ const findLinks = (path) => {
   let match
   while ((match = regex.exec(data)) !== null) {
     links.push({ 
-      href: match[0],
+      href: match[2], //solo se toma la URL de la expresión regular
       text: match[1],
       file: path
     })
@@ -53,47 +49,33 @@ const findLinks = (path) => {
 // const links = findLinks('README.md');
 // console.log(links);
 
-// readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
-// .then((texto) => {
-//  console.log(findLinks(texto, 'C:/Users/USER/Documents/DEV003-md-links/README.md'));
-// }).catch(err => console.log(err.message))
- 
+const validateLinks = (arr) => {
+  return Promise.all(arr.map(link => {
+    return fetch(link.href)
+      .then(res => ({
+        href: link.href,
+        text: link.text,
+        file: link.file,
+        status: res.status,
+        ok: res.ok
+      }))
+      .catch(error => ({
+        href: link.href,
+        text: link.text,
+        file: link.file,
+        tatus: error ? error.status : 'Error desconocido',
+        statusText: error ? error.statusText : 'Error desconocido' 
+      }));
+  }));
+}
 
 
-//ciclo - iterar array - le paso fetch - solamente a la propiedad href
-//array de objetos - retorne 2 array de objetos - uno cuando funcione y otro cuando no='roto'
-//luego del fetch usar .then (ok) y .catch (rotos)
-
-const validateLinks = (array) => {
-  let arrayObject = array.map((link) => {
-      return fetch(link.href)
-          .then(data => {
-              return {
-                  href: link.href,
-                  text: link.text,
-                  file: link.file,
-                  status: data.status,
-                  state: data.statusText,
-              }
-          })
-          .catch(error => {
-            //console.log(error)
-              return {
-                  href: link.href,
-                  text: link.text,
-                  file: link.file,
-                  status: error.status,
-                  state: error.error,
-              }
-          });
-  })
-  return Promise.all(arrayObject);
-} 
-
-const resultado = findLinks('README.md');
+const resultado = findLinks('prueba.md');
 validateLinks(resultado)
-.then((res) => console.log('llamando', res))
+.then((res) => console.log(res))
 .catch((error) => console.log(error))
+
+
 
 module.exports = {
   pathValid,

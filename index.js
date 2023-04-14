@@ -42,14 +42,17 @@ const mdLinks = (path, options) => {
         //console.log('result if', result)
         resolve(result)
       })
+    }else{
+      //console.log('result if', result)
+      resolve(response)
     }
      
       
 
 
       resolve('es correcto')
-      
-    })
+        
+      })
 
     //resolver la función de http
 
@@ -57,7 +60,10 @@ const mdLinks = (path, options) => {
 //C:/Users/USER/Documents/DEV003-md-links/folder_files/archivo.txt
 //C:/Users/USER/Documents/DEV003-md-links/readme.md
 
-// mdLinks('README.text')
+// mdLinks('README.md', { validate: true }).then((data) => console.log('data: ', data))
+// mdLinks('README.md', { validate: false }).then((data) => console.log('data: ', data))
+
+// mdLinks('prueba.md')
 // .then((result) => {
 //   console.log(result)
 // })
