@@ -35,12 +35,12 @@ const readingFile = (file) => fs.readFileSync(file, 'utf8');
 //   }).catch(err => console.log('El archivo no puede ser leído'));
 
 //crear arreglo sobre el .md -- CASO: VALIDATE:FALSE
-const findLinks = (data, path) => {
+const findLinks = (path) => {
+  const data = readingFile(path)
   const regex = /\[([^\]]+)\]\((http[s]?:\/\/[^\)]+)\)/g
   const links = []
-  const fileContent = readingFile(path)
   let match
-  while ((match = regex.exec(fileContent)) !== null) {
+  while ((match = regex.exec(data)) !== null) {
     links.push({ 
       href: match[0],
       text: match[1],
@@ -50,8 +50,8 @@ const findLinks = (data, path) => {
   return links;
 }
 
-const links = findLinks('arreglo','README.md');
-console.log(links);
+// const links = findLinks('README.md');
+// console.log(links);
 
 // readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
 // .then((texto) => {
@@ -90,10 +90,10 @@ const validateLinks = (array) => {
   return Promise.all(arrayObject);
 } 
 
-// const resultado = findLinks('esto','README.md');
-// validateLinks(resultado)
-// .then((res) => console.log('llamando', res))
-// .catch((error) => console.log(error))
+const resultado = findLinks('README.md');
+validateLinks(resultado)
+.then((res) => console.log('llamando', res))
+.catch((error) => console.log(error))
 
 module.exports = {
   pathValid,
