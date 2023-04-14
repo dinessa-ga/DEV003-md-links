@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { Response } = require('node-fetch')
 const promises = require('fs').promises
 const path = require('path')
 //const extract = require('markdown-link-extractor');
@@ -49,8 +50,8 @@ const findLinks = (data, path) => {
   return links;
 }
 
-// const links = findLinks('arreglo','README.md');
-// console.log(links);
+const links = findLinks('arreglo','README.md');
+console.log(links);
 
 // readingFile('C:/Users/USER/Documents/DEV003-md-links/README.md')
 // .then((texto) => {
@@ -72,33 +73,27 @@ const validateLinks = (array) => {
                   text: link.text,
                   file: link.file,
                   status: data.status,
-                  state: data.statusText
+                  state: data.statusText,
               }
           })
           .catch(error => {
+            //console.log(error)
               return {
                   href: link.href,
                   text: link.text,
                   file: link.file,
                   status: error.status,
-                  state: error.statusText,
+                  state: error.error,
               }
           });
   })
   return Promise.all(arrayObject);
 } 
 
-//console.log(validateLinks(findLinks('','README.md')))
-
-// const resultado = readFile('README.md');
-//   validateLinks(findLinks(resultado))
-//   .then((res) => console.log(res))
-//   .catch((error) => console.log(error))
-
-const resultado = findLinks('esto','README.md');
-validateLinks(resultado)
-.then((res) => console.log('llamando', res))
-.catch((error) => console.log(error))
+// const resultado = findLinks('esto','README.md');
+// validateLinks(resultado)
+// .then((res) => console.log('llamando', res))
+// .catch((error) => console.log(error))
 
 module.exports = {
   pathValid,
