@@ -7,7 +7,7 @@ const path = require('path')
 
 
 const pathValid = (path) => {
-   return fs.existsSync(path)
+  return fs.existsSync(path)
 }
 
 //ruta absoluta
@@ -23,7 +23,7 @@ const isFile = (path) => {
 }
 
 //detectar .md 
-const isFileMd = (file) => path.extname(file) === '.md'; 
+const isFileMd = (file) => path.extname(file) === '.md';
 
 
 //Leer archivo .md
@@ -37,7 +37,7 @@ const findLinks = (path) => {
   const links = []
   let match
   while ((match = regex.exec(data)) !== null) {
-    links.push({ 
+    links.push({
       href: match[2], //solo se toma la URL de la expresión regular
       text: match[1],
       file: path
@@ -64,18 +64,16 @@ const validateLinks = (arr) => {
         text: link.text,
         file: link.file,
         tatus: error ? error.status : 'Error desconocido',
-        statusText: error ? error.statusText : 'Error desconocido' 
+        statusText: error ? error.statusText : 'Error desconocido'
       }));
   }));
 }
 
 
-const resultado = findLinks('prueba.md');
-validateLinks(resultado)
-.then((res) => console.log(res))
-.catch((error) => console.log(error))
-
-
+// const resultado = findLinks('prueba.md');
+// validateLinks(resultado)
+// .then((res) => console.log(res))
+// .catch((error) => console.log(error))
 
 module.exports = {
   pathValid,
@@ -87,4 +85,3 @@ module.exports = {
   findLinks,
   validateLinks,
 }
- 
