@@ -1,7 +1,6 @@
 const { ok } = require('assert')
 const fs = require('fs')
 const { Response } = require('node-fetch')
-const promises = require('fs').promises
 const path = require('path')
 //const extract = require('markdown-link-extractor');
 
@@ -27,7 +26,7 @@ const isFileMd = (file) => path.extname(file) === '.md';
 
 
 //Leer archivo .md
-//const readingFile = (file) => promises.readFile(file, 'utf8') //Antes se utilizaba readFileSync
+//const readingFile = (file) => promises.readFile(file, 'utf8') 
 const readingFile = (file) => fs.readFileSync(file, 'utf8');
 
 //crear arreglo sobre el .md -- CASO: VALIDATE:FALSE

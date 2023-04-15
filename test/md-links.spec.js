@@ -1,8 +1,10 @@
-//const mdLinks = require('../');
-const {isFileMd, readingFile, findLinks } = require('../api.js');
+//const mdLinks = require('../')
+const {isFileMd} = require('../api.js')
 const fs = require('fs');
 const mdLinks = require('../index.js')
+const fetch = require('node-fetch')
 
+jest.mock('node-fetch')
 
 
 

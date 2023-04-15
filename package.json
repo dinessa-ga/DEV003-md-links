@@ -15,5 +15,13 @@
   },
   "scripts": {
     "test": "jest --verbose --coverage"
-  }
+  },
+
+  "author": "Diana Vanessa Guaiña",
+  "license": "ISC",
+  "bin": {
+    "md-links": "cli.js"
+  },
+  "description": "Aplicación que permite la validación de enlaces en archivos Markdown.",
+  "main": "index.js"
 }

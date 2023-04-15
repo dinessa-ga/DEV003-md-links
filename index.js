@@ -35,6 +35,7 @@ const mdLinks = (path, options) => {
         })
 
     }
+    reject('la ruta no existe') //probando
     resolve('es correcto', response)
 
   })
@@ -46,13 +47,13 @@ const mdLinks = (path, options) => {
 // mdLinks('README.md', { validate: true }).then((data) => console.log('data: ', data))
 // mdLinks('README.md', { validate: false }).then((data) => console.log('data: ', data))
 
-mdLinks('prueba.md')
-  .then((result) => {
-    console.log(result)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+// mdLinks('prueba.md')
+//   .then((result) => {
+//     console.log(result)
+//   })
+//   .catch((error) => {
+//     console.log(error)
+//   })
 
 module.exports = () => {
   mdLinks
