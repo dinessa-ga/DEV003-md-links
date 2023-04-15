@@ -35,7 +35,8 @@ const mdLinks = (path, options) => {
         })
 
     }
-    reject('la ruta no existe') //probando
+
+    //reject('la ruta no existe') //probando
     resolve('es correcto', response)
 
   })
