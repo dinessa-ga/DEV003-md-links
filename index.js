@@ -34,9 +34,24 @@ const mdLinks = (path, options) => {
           resolve(error)
         })
 
+    }else{
+      resolve(response)
     }
+    
+    // if (!options.validate) {
+    //   const response = api.findLinks(isPath)
+    //   api.validateLinks(response)
+    //     .then((result) => {
+    //       resolve(result)
+    //     })
+    //     .catch(error => {
+    //       resolve(error)
+    //     })
 
-    //reject('la ruta no existe') //probando
+    // }else{
+    //   resolve(response)
+    // }
+
     resolve('es correcto', response)
 
   })
@@ -45,7 +60,7 @@ const mdLinks = (path, options) => {
 //C:/Users/USER/Documents/DEV003-md-links/folder_files/archivo.txt
 //C:/Users/USER/Documents/DEV003-md-links/readme.md
 
-//mdLinks('README.md', { validate: true }).then((data) => console.log('data: ', data))
+//mdLinks('prueba.md', { validate: true }).then((data) => console.log('data: ', data))
 //mdLinks('README.md', { validate: false }).then((data) => console.log('data: ', data))
 
 mdLinks('prueba.md')
