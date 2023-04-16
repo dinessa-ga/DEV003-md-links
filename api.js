@@ -1,8 +1,6 @@
-const { ok } = require('assert')
 const fs = require('fs')
-const { Response } = require('node-fetch')
 const path = require('path')
-//const extract = require('markdown-link-extractor');
+
 
 
 const pathValid = (path) => {
@@ -68,11 +66,21 @@ const validateLinks = (arr) => {
   }));
 }
 
+//Función para devolver estadísticas básicas sobre los links - total:
+const totalLinks = (path) => `Total: ${findLinks(path).length}`;
+
 
 // const resultado = findLinks('prueba.md');
 // validateLinks(resultado)
 // .then((res) => console.log(res))
 // .catch((error) => console.log(error))
+
+// const path1 = 'prueba.md'
+// console.log('Links encontrados:');
+// console.log(findLinks(path1));
+
+// console.log('Total de links:');
+// console.log(totalLinks(path1));
 
 module.exports = {
   pathValid,
@@ -83,4 +91,5 @@ module.exports = {
   readingFile,
   findLinks,
   validateLinks,
+  totalLinks,
 }

@@ -37,22 +37,9 @@ const mdLinks = (path, options) => {
     }else{
       resolve(response)
     }
-    
-    // if (!options.validate) {
-    //   const response = api.findLinks(isPath)
-    //   api.validateLinks(response)
-    //     .then((result) => {
-    //       resolve(result)
-    //     })
-    //     .catch(error => {
-    //       resolve(error)
-    //     })
 
-    // }else{
-    //   resolve(response)
-    // }
-
-    resolve('es correcto', response)
+   
+    resolve('es correcto')
 
   })
 
@@ -61,7 +48,7 @@ const mdLinks = (path, options) => {
 //C:/Users/USER/Documents/DEV003-md-links/readme.md
 
 //mdLinks('prueba.md', { validate: true }).then((data) => console.log('data: ', data))
-//mdLinks('README.md', { validate: false }).then((data) => console.log('data: ', data))
+//mdLinks('prueba.md', { validate: false }).then((data) => console.log('data: ', data))
 
 mdLinks('prueba.md')
   .then((result) => {
