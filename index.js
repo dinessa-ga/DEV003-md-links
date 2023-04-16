@@ -44,19 +44,21 @@ const mdLinks = (path, options) => {
   })
 
 }
+
+mdLinks('prueba.md')
 //C:/Users/USER/Documents/DEV003-md-links/folder_files/archivo.txt
 //C:/Users/USER/Documents/DEV003-md-links/readme.md
 
 //mdLinks('prueba.md', { validate: true }).then((data) => console.log('data: ', data))
 //mdLinks('prueba.md', { validate: false }).then((data) => console.log('data: ', data))
 
-mdLinks('prueba.md')
-  .then((result) => {
-    console.log(result)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+// mdLinks('prueba.md')
+//   .then((result) => {
+//     console.log(result)
+//   })
+//   .catch((error) => {
+//     console.log(error)
+//   })
 
 module.exports = () => {
   mdLinks

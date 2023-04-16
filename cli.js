@@ -26,10 +26,23 @@ const cli = () => {
 
     }
 
+    else if (stats && validate) {
+        return mdLinks(path, { validate: validate, stats }).then((links) => {
+            console.log("\nTOTAL LINKS  :" + (totalLinks(links)));
+            console.log("---------------------------------------------------------");
+            process.exit(0);
+        }).catch((error) => { console.log(error); 
+        })
+        
+    } else if(stats && !validate) {
+        return mdLinks(path, { validate: stats }).then((links) => {
+            console.log("\nTOTAL LINKS  :" + (totalLinks(links)));
+            console.log("---------------------------------------------------------");
+        }).catch((error) => { console.log(error); })
+
+    } 
 
 }
-
-
 
 
 cli()
