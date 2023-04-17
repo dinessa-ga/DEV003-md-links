@@ -26,7 +26,7 @@ const mdLinks = (path, options) => {
     const response = api.findLinks(isPath)
     if (options?.validate) {
 
-      api.validateLinks(response)
+        api.validateLinks(response)
         .then((result) => {
           resolve(result)
         })
@@ -45,12 +45,11 @@ const mdLinks = (path, options) => {
 
 }
 
-mdLinks('prueba.md')
-//C:/Users/USER/Documents/DEV003-md-links/folder_files/archivo.txt
-//C:/Users/USER/Documents/DEV003-md-links/readme.md
+//C:/Users/USER/OneDrive/Documentos/DEV003-md-links/prueba.md
+
 
 //mdLinks('prueba.md', { validate: true }).then((data) => console.log('data: ', data))
-//mdLinks('prueba.md', { validate: false }).then((data) => console.log('data: ', data))
+mdLinks('prueba.md', { validate: false }).then((data) => console.log('data: ', data))
 
 // mdLinks('prueba.md')
 //   .then((result) => {

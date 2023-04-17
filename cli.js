@@ -2,7 +2,7 @@
 
 const { mdLinks } = require('./index.js')
 const { totalLinks } = require('./api.js')
-const process = require("process");
+const process = require('process');
 const argv = process.argv;
 const path = process.argv[2];
 
@@ -23,7 +23,7 @@ const cli = () => {
         console.log('--stats --> when you require to see stadistics and status of the links')
         console.log("--validate --stats: To see statistics and status of the links ");
         process.exit(0)
-
+ 
     }
 
     else if (stats && validate) {
@@ -34,12 +34,6 @@ const cli = () => {
         }).catch((error) => { console.log(error); 
         })
         
-    } else if(stats && !validate) {
-        return mdLinks(path, { validate: stats }).then((links) => {
-            console.log("\nTOTAL LINKS  :" + (totalLinks(links)));
-            console.log("---------------------------------------------------------");
-        }).catch((error) => { console.log(error); })
-
     } 
 
 }

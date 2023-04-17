@@ -1,11 +1,6 @@
 //const mdLinks = require('../')
 const {isFileMd} = require('../api.js')
-const fs = require('fs');
 const mdLinks = require('../index.js')
-const fetch = require('node-fetch')
-
-jest.mock('node-fetch')
-
 
 
 // describe('mdLinks', () => {
@@ -13,9 +8,20 @@ jest.mock('node-fetch')
 //   it('should...', () => {
 //     console.log('FIX ME!');
 //   });
-
-  
 // });
+const path = 'archivo.text'
+const options = null
+
+
+// test('should reject a promise with an error message when the path does not exist', () => {
+//   return expect(mdLinks(path, options)).rejects.toMatch('error');
+// });
+
+test('should reject the promise with the expected error', async () => {
+  const expectedError = new Error('Something went wrong');
+  await expect(mdLinks(path, options)).rejects.toEqual(expectedError);
+});
+
 
 describe('isFileMd', () => {
   it('devuelve true para archivos con extensión .md', () => {
@@ -26,5 +32,24 @@ describe('isFileMd', () => {
     expect(isFileMd('archivo.txt')).toBe(false);
   });
 });
+
+describe('mdLinks', () => {
+  it('should be a function', () => {
+    expect(typeof mdLinks).toBe('function');
+  });
+  it('should return a promise', () => {
+    return mdLinks()
+      .then(() => {
+       expect(mdLinks).toBe(typeof 'promise')
+      })
+      .catch((err) => { err });
+  });
+
+  it('should return the links with the value of href, text and file', async () => {
+    const content = mdLinks(path, { validate: false })
+    await expect(content).toEqual(arrayLinks)
+  });
+ 
+ })
 
 

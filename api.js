@@ -46,6 +46,7 @@ const findLinks = (path) => {
 // const links = findLinks('README.md');
 // console.log(links);
 
+//crear arreglo con peticiones http sobre el .md -- CASO: VALIDATE:TRUE
 const validateLinks = (arr) => {
   return Promise.all(arr.map(link => {
     return fetch(link.href)
@@ -62,20 +63,21 @@ const validateLinks = (arr) => {
         file: link.file,
         tatus: error.status,
         statusText: error.statusText
-      }));
-  }));
+      }))
+  }))
 }
 
 //Función para devolver estadísticas básicas sobre los links - total:
 const totalLinks = (path) => `Total: ${findLinks(path).length}`;
 
 
-// const resultado = findLinks('prueba.md');
-// validateLinks(resultado)
-// .then((res) => console.log(res))
-// .catch((error) => console.log(error))
+const resultado = findLinks('prueba.md');
+validateLinks(resultado)
+.then((res) => console.log(res))
+.catch((error) => console.log(error))
 
-// const path1 = 'prueba.md'
+
+// const path1 = 'C:/Users/USER/OneDrive/Documentos/DEV003-md-links/prueba.md'
 // console.log('Links encontrados:');
 // console.log(findLinks(path1));
 
