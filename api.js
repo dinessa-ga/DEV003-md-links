@@ -71,10 +71,10 @@ const validateLinks = (arr) => {
 const totalLinks = (path) => `Total: ${findLinks(path).length}`;
 
 
-const resultado = findLinks('prueba.md');
-validateLinks(resultado)
-.then((res) => console.log(res))
-.catch((error) => console.log(error))
+// const resultado = findLinks('prueba.md');
+// validateLinks(resultado)
+// .then((res) => console.log(res))
+// .catch((error) => console.log(error))
 
 
 // const path1 = 'C:/Users/USER/OneDrive/Documentos/DEV003-md-links/prueba.md'

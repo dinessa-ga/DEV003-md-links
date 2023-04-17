@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { mdLinks } = require('./index.js')
+const  mdLinks  = require('./index')
 const { totalLinks } = require('./api.js')
 const process = require('process');
 const argv = process.argv;
@@ -26,8 +26,8 @@ const cli = () => {
  
     }
 
-    else if (stats && validate) {
-        return mdLinks(path, { validate: validate, stats }).then((links) => {
+    else if (stats) {
+        return mdLinks(path, { stats: stats}).then((links) => {
             console.log("\nTOTAL LINKS  :" + (totalLinks(links)));
             console.log("---------------------------------------------------------");
             process.exit(0);

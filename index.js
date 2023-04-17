@@ -31,7 +31,7 @@ const mdLinks = (path, options) => {
           resolve(result)
         })
         .catch(error => {
-          resolve(error)
+          reject(error)
         })
 
     }else{
@@ -48,8 +48,8 @@ const mdLinks = (path, options) => {
 //C:/Users/USER/OneDrive/Documentos/DEV003-md-links/prueba.md
 
 
-//mdLinks('prueba.md', { validate: true }).then((data) => console.log('data: ', data))
-mdLinks('prueba.md', { validate: false }).then((data) => console.log('data: ', data))
+mdLinks('prueba.md', { validate: true }).then((data) => console.log('data: ', data))
+//mdLinks('prueba.md', { validate: false }).then((data) => console.log('data: ', data))
 
 // mdLinks('prueba.md')
 //   .then((result) => {
@@ -59,6 +59,6 @@ mdLinks('prueba.md', { validate: false }).then((data) => console.log('data: ', d
 //     console.log(error)
 //   })
 
-module.exports = () => {
+module.exports = {
   mdLinks
 };
