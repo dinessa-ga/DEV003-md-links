@@ -63,12 +63,18 @@ describe('mdLinks', () => {
 
   it('should return a promise', () => {
     expect(mdLinks(path, options)).toBeInstanceOf(Promise);
-  });
+  })
  
   it('should return the links with the value of href, text and file', async () => {
     const content = await mdLinks(path, { validate: false })
     expect(content).toEqual(arrayLinks)
   })
+
+  it('should return the links with the value of href, text and file', async () => {
+    const content = await mdLinks(path, { validate: true })
+    expect(content).toEqual(arrayLinks)
+  })
+
  
  })
 
