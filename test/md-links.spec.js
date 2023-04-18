@@ -26,6 +26,24 @@ const arrayLinks =
   },
 ]
 
+const arrayLinksTrue = 
+[
+  {
+    href: 'https://docs.npmjs.com/misc/scripts',
+    text: 'scripts - Documentación oficial (en inglés)',
+    file: 'C:\\Users\\USER\\OneDrive\\Documentos\\DEV003-md-links\\prueba.md',
+    status: 200,
+    ok: true
+  },
+  {
+    href: 'https://nodejs.org/es/about/',
+    text: 'Acerca de Node.js - Documentación oficial',
+    file: 'C:\\Users\\USER\\OneDrive\\Documentos\\DEV003-md-links\\prueba.md',
+    status: 200,
+    ok: true
+  },
+]
+
 
 // test('should reject a promise with an error message when the path does not exist', () => {
 //   return expect(mdLinks(path, options)).rejects.toMatch('error');
@@ -70,9 +88,9 @@ describe('mdLinks', () => {
     expect(content).toEqual(arrayLinks)
   })
 
-  it('should return the links with the value of href, text and file', async () => {
+  it('should return the links with the value of href, text, file, status, ok', async () => {
     const content = await mdLinks(path, { validate: true })
-    expect(content).toEqual(arrayLinks)
+    expect(content).toEqual(arrayLinksTrue)
   })
 
  

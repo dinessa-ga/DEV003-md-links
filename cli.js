@@ -27,7 +27,7 @@ const cli = () => {
     }
 
     else if (stats) {
-        return mdLinks(path, { stats: stats}).then((links) => {
+        return mdLinks(path, {validate: validate}).then((links) => {
             console.log("\nTOTAL LINKS  :" + (totalLinks(links)));
             console.log("---------------------------------------------------------");
             process.exit(0);
@@ -39,4 +39,6 @@ const cli = () => {
 }
 
 
-cli()
+//cli()
+
+console.log(process.argv)

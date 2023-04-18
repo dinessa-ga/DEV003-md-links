@@ -39,7 +39,7 @@ const mdLinks = (path, options) => {
     }
 
    
-    resolve('es correcto')
+    //resolve('es correcto')
 
   })
 
@@ -48,7 +48,7 @@ const mdLinks = (path, options) => {
 //C:/Users/USER/OneDrive/Documentos/DEV003-md-links/prueba.md
 
 
-mdLinks('prueba.md', { validate: true }).then((data) => console.log('data: ', data))
+//mdLinks('prueba.md', { validate: true }).then((data) => console.log('data: ', data))
 //mdLinks('prueba.md', { validate: false }).then((data) => console.log('data: ', data))
 
 // mdLinks('prueba.md')
