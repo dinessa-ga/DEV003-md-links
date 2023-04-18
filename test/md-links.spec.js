@@ -2,13 +2,6 @@
 const {isFileMd} = require('../api.js')
 const {mdLinks} = require('../index.js')
 
-
-// describe('mdLinks', () => {
-
-//   it('should...', () => {
-//     console.log('FIX ME!');
-//   });
-// });
 const path = 'prueba.md'
 const options = null
 
@@ -44,17 +37,6 @@ const arrayLinksTrue =
   },
 ]
 
-
-// test('should reject a promise with an error message when the path does not exist', () => {
-//   return expect(mdLinks(path, options)).rejects.toMatch('error');
-// });
-
-// test('should reject the promise with the expected error', async () => {
-//   const expectedError = new Error('Something went wrong');
-//   await expect(mdLinks(path, options)).rejects.toEqual(expectedError);
-// });
-
-
 describe('isFileMd', () => {
   it('devuelve true para archivos con extensión .md', () => {
     expect(isFileMd('prueba.md')).toBe(true);
@@ -71,14 +53,6 @@ describe('mdLinks', () => {
     expect(typeof mdLinks).toBe('function');
   })
 
-  // it('should return a promise', () => {
-  //   return mdLinks()
-  //     .then(() => {
-  //      expect(mdLinks()).toBe(typeof 'promise')
-  //     })
-  //     .catch((err) => { err });
-  // })
-
   it('should return a promise', () => {
     expect(mdLinks(path, options)).toBeInstanceOf(Promise);
   })
@@ -92,8 +66,6 @@ describe('mdLinks', () => {
     const content = await mdLinks(path, { validate: true })
     expect(content).toEqual(arrayLinksTrue)
   })
-
- 
  })
 
 
